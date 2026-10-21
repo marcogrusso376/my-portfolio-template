@@ -797,3 +797,27 @@ header.scrolled .brand-logo img {
 .thank-you-button:hover {
     background: #0a3563;
 }
+
+
+@media (max-width: 768px) {
+    header > nav.nav-left,
+    header > .nav-right {
+        display: none !important;
+    }
+
+    header > .menu-toggle {
+        display: block !important;
+        color: black !important;
+        position: relative;
+        z-index: 1002;
+    }
+
+    header > .mobile-menu {
+        display: none;
+    }
+
+    header > .mobile-menu.active {
+        display: flex !important;
+        flex-direction: column;
+    }
+}

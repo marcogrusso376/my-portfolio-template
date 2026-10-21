@@ -1,5 +1,3 @@
-
-
 fetch("./header.html")
     .then(response => {
         if (!response.ok) {
@@ -12,8 +10,10 @@ fetch("./header.html")
         document.body.insertAdjacentHTML("afterbegin", data);
 
         const header = document.querySelector("header");
+        const menuToggle = header.querySelector(".menu-toggle");
+        const mobileMenu = header.querySelector(".mobile-menu");
 
-        // Existing scroll effect
+        // Navbar scroll effect
         function updateHeader() {
             header.classList.toggle("scrolled", window.scrollY > 50);
         }
@@ -24,50 +24,46 @@ fetch("./header.html")
 
         updateHeader();
 
-        // Mobile hamburger menu
-        const menuToggle = header.querySelector(".menu-toggle");
-        const mobileMenu = header.querySelector(".mobile-menu");
-
+        // Mobile menu toggle
         if (menuToggle && mobileMenu) {
-            menuToggle.addEventListener("click", () => {
+            menuToggle.addEventListener("click", event => {
+                event.stopPropagation();
+
                 const isOpen = mobileMenu.classList.toggle("active");
 
                 menuToggle.textContent = isOpen ? "✕" : "☰";
-                menuToggle.setAttribute("aria-expanded", isOpen);
+                menuToggle.setAttribute("aria-expanded", String(isOpen));
                 menuToggle.setAttribute(
                     "aria-label",
                     isOpen ? "Close navigation menu" : "Open navigation menu"
                 );
             });
 
-            // Close the menu after selecting a link
+            // Close menu when a link is clicked
             mobileMenu.querySelectorAll("a").forEach(link => {
                 link.addEventListener("click", () => {
                     mobileMenu.classList.remove("active");
                     menuToggle.textContent = "☰";
                     menuToggle.setAttribute("aria-expanded", "false");
-                    menuToggle.setAttribute(
-                        "aria-label",
-                        "Open navigation menu"
-                    );
+                    menuToggle.setAttribute("aria-label", "Open navigation menu");
                 });
             });
 
-            // Close the menu if the user taps outside the header
+            // Close menu when clicking outside
             document.addEventListener("click", event => {
                 if (!header.contains(event.target)) {
                     mobileMenu.classList.remove("active");
                     menuToggle.textContent = "☰";
                     menuToggle.setAttribute("aria-expanded", "false");
-                    menuToggle.setAttribute(
-                        "aria-label",
-                        "Open navigation menu"
-                    );
+                    menuToggle.setAttribute("aria-label", "Open navigation menu");
                 }
             });
+        } else {
+            console.error("Mobile menu button or menu not found in header.html");
         }
     })
     .catch(error => console.error("Navbar error:", error));
+
 
     
 /* Enlarge a project image when clicked */
