@@ -1,4 +1,5 @@
 
+
 fetch("./header.html")
     .then(response => {
         if (!response.ok) {
@@ -12,6 +13,7 @@ fetch("./header.html")
 
         const header = document.querySelector("header");
 
+        // Existing scroll effect
         function updateHeader() {
             header.classList.toggle("scrolled", window.scrollY > 50);
         }
@@ -21,9 +23,51 @@ fetch("./header.html")
         });
 
         updateHeader();
+
+        // Mobile hamburger menu
+        const menuToggle = header.querySelector(".menu-toggle");
+        const mobileMenu = header.querySelector(".mobile-menu");
+
+        if (menuToggle && mobileMenu) {
+            menuToggle.addEventListener("click", () => {
+                const isOpen = mobileMenu.classList.toggle("active");
+
+                menuToggle.textContent = isOpen ? "✕" : "☰";
+                menuToggle.setAttribute("aria-expanded", isOpen);
+                menuToggle.setAttribute(
+                    "aria-label",
+                    isOpen ? "Close navigation menu" : "Open navigation menu"
+                );
+            });
+
+            // Close the menu after selecting a link
+            mobileMenu.querySelectorAll("a").forEach(link => {
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.remove("active");
+                    menuToggle.textContent = "☰";
+                    menuToggle.setAttribute("aria-expanded", "false");
+                    menuToggle.setAttribute(
+                        "aria-label",
+                        "Open navigation menu"
+                    );
+                });
+            });
+
+            // Close the menu if the user taps outside the header
+            document.addEventListener("click", event => {
+                if (!header.contains(event.target)) {
+                    mobileMenu.classList.remove("active");
+                    menuToggle.textContent = "☰";
+                    menuToggle.setAttribute("aria-expanded", "false");
+                    menuToggle.setAttribute(
+                        "aria-label",
+                        "Open navigation menu"
+                    );
+                }
+            });
+        }
     })
     .catch(error => console.error("Navbar error:", error));
-
 
     
 /* Enlarge a project image when clicked */
