@@ -1,3 +1,5 @@
+/*Header*/
+
 fetch("./header.html")
     .then(response => {
         if (!response.ok) {
@@ -64,6 +66,12 @@ fetch("./header.html")
     })
     .catch(error => console.error("Navbar error:", error));
 
+
+/*Footer*/
+
+fetch("footer.html")
+    .then(response => response.text())
+    .then(data => {document.body.insertAdjacentHTML("beforeend", data)});
 
     
 /* Enlarge a project image when clicked */
