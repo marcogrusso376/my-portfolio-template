@@ -171,6 +171,7 @@ header.scrolled .brand-logo img {
     border: none;
     cursor: pointer;
     padding: 10px 0;
+    transition: color 0.20s;
 }
 
 .dropdown-button:hover {
