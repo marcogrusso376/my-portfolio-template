@@ -218,61 +218,101 @@ header.scrolled .brand-logo img {
     display: block;
 }
 
-/* Mobile navigation button */
-.menu-toggle {
+/* Mobile navigation */
+.menu-toggle,
+.mobile-menu {
     display: none;
-    background: none;
-    border: none;
-    font-size: 30px;
-    cursor: pointer;
-    color: white;
 }
 
-/* Mobile layout */
 @media (max-width: 768px) {
-    .site-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        box-sizing: border-box;
-        z-index: 1000;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+
+    /* Keep the header fixed and aligned */
+    header {
+        height: 80px;
+        padding: 0 18px;
     }
 
-    .menu-toggle {
+    /* Hide the desktop navigation and socials */
+    header > nav,
+    header .nav-right {
+        display: none;
+    }
+
+    /* Center the logo */
+    header .brand-badge {
+        width: 100px;
+        height: 100px;
+        border-radius: 0 0 50px 50px;
+    }
+
+    header .brand-logo img {
+        width: 80px;
+        height: 80px;
+    }
+
+    header.scrolled .brand-badge {
+        width: 75px;
+        height: 75px;
+        border-radius: 0 0 38px 38px;
+    }
+
+    header.scrolled .brand-logo img {
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Three-line button */
+    header .menu-toggle {
         display: block;
         margin-left: auto;
+        padding: 8px;
+        background: transparent;
+        border: none;
+        color: black;
+        font-size: 30px;
+        line-height: 1;
+        cursor: pointer;
         position: relative;
         z-index: 1002;
     }
 
-    .nav-links {
+    /* Dropdown menu is hidden until clicked */
+    header .mobile-menu {
         display: none;
         position: absolute;
         top: 100%;
         right: 0;
-        width: 200px;
-        background: #0f4b8c;
+        width: 210px;
+        padding: 8px 0;
+        background: #080808;
         flex-direction: column;
-        padding: 15px;
-        gap: 18px;
-        box-sizing: border-box;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 12px rgba(0, 0, 0, 0.35);
+        z-index: 1001;
     }
 
-    .nav-links.active {
+    header .mobile-menu.active {
         display: flex;
     }
 
-    .nav-links a {
+    header .mobile-menu a {
         display: block;
-        padding: 8px;
+        padding: 14px 20px;
+        color: white;
+        font-family: Georgia, 'Times New Roman', serif;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    header .mobile-menu a:hover {
+        background: #252525;
+        color: lightblue;
+    }
+
+    /* Keep page content from sitting under the header */
+    .portfolio {
+        padding-top: 140px;
     }
 }
-
 
 /* Portfolio homepage */
 
